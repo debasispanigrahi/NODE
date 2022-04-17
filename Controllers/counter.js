@@ -1,11 +1,21 @@
-const {delay} = require("@root/Helpers/utilty")
+const { delay } = require("@root/Helpers/utilty");
+const userModel = require("@root/Models/user.model");
 exports.start = async (req, res) => {
-    let answer;
-    await delay(1000).then(() => {
-        answer = 'I have Waited for you';
-    })
-    res.status(200).json({
-        status: true,
-        message: answer
+    // let answer;
+    // const find = await userModel.find({})
+    // await delay(1000).then(() => {
+    //     answer = 'I have Waited for you';
+    // })
+    // res.status(200).json({
+    //     status: true,
+    //     message: find,
+    //     answer: answer
+    // })
+    res.render('index', {
+        locals: {
+            title: 'Welcome!', name: [
+                'debasish', 'ram', 'shyam', 'sita'
+            ]
+        }
     })
 }

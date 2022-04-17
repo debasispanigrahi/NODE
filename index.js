@@ -7,6 +7,7 @@ const cors = require('cors');
 const fileUpload = require("express-fileupload");
 const socketIO = require("socket.io");
 const http = require("http");
+const es6Renderer = require('express-es6-template-engine')
 
 
 //IMPORT_FILE
@@ -35,6 +36,16 @@ const io = socketIO(server, {
     ]
 });
 
+//SERVER_USE
+app.engine('html', es6Renderer)
+app.set('views', 'Views');
+app.set('view engine', 'html');
+app.use(express.static(__dirname + '/Public'))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors({ credentials: true }));
+app.use(fileUpload())
+
 
 //VARIABLE
 const host = process.env.HOST || 'localhost';
@@ -50,13 +61,6 @@ mongo
     .catch((err) => {
         console.log("Error occured While connecting database");
     });
-
-//SERVER_USE
-app.use(express.static(__dirname + '/Public'))
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true }));
-app.use(fileUpload())
 
 //ROUTE
 app.use("/api", api);
