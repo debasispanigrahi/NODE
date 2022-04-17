@@ -1,7 +1,7 @@
-const { delay } = require("../Helpers/utilty")
+const {delay} = require("@root/Helpers/utilty")
 exports.start = async (req, res) => {
     let answer;
-    await delay(5000).then(() => {
+    await delay(1000).then(() => {
         answer = 'I have Waited for you';
     })
     res.status(200).json({
