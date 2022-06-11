@@ -1,13 +1,14 @@
 //DEPENDENCY
 require('module-alias/register')
 const express = require('express');
+// import express  from "express";
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
 const cors = require('cors');
 const fileUpload = require("express-fileupload");
 const socketIO = require("socket.io");
 const http = require("http");
-const es6Renderer = require('express-es6-template-engine')
+const es6Renderer = require('express-es6-template-engine');
 
 
 //IMPORT_FILE
@@ -72,3 +73,5 @@ app.use(["/", "/index.php"], web);
 server.listen(port, host, () => {
     console.log(`Server Running On http://${host}:${port}`)
 })
+
+

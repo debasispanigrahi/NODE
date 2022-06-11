@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "checkJs": false,
+    "outDir": "lib",
+    "strict": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "lib": [
+      "es2020",
+      "esnext.array",
+      "DOM"
+    ],
+    "paths": {
+      "@root/*": [
+        "./*"
+      ],
+      "@helper/*": [
+        "./Helpers/*"
+      ],
+      "@controller/*": [
+        "./Controllers/*"
+      ],
+      "@cron/*": [
+        "./Crons/*"
+      ],
+      "@data/*": [
+        "./Data/*"
+      ]
+    },
+    "baseUrl": "./",
+    "alwaysStrict": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}

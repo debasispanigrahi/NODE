@@ -1,3 +1,4 @@
 {
-   "ignore":["Public/*","Data/*"] 
+   "ignore":["Public/*","Data/*"] ,
+   "ext":"ts,js,env"
 }
