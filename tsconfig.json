@@ -39,8 +39,9 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "./src/**/*.ts"
+    "*"
   ],
+  "files": ["./Helpers/global.ts"],
   "exclude": [
     "node_modules",
     "**/node_modules/*"

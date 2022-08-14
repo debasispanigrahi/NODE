@@ -1,4 +1,4 @@
-require('module-alias/register');
+require('../moduleAlias');
 const { getSessionFile } = require('@root/Helpers/utilty');
 const fs = require('fs');
 const CRON_FILE = "Data/cron.json";

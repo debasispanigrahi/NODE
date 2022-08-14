@@ -6,9 +6,9 @@
     "email": "debasish.earth@gmail.com"
   },
   "scripts": {
-    "start": "SET NODE_ENV=development && nodemon -r ts-node/register index.ts",
-    "dev": "nodemon index.js",
-    "prod": "SET NODE_ENV=production && node -r ts-node/register index.js"
+    "start:dev": "npx nodemon --exec \"npm run dev\"",
+    "prod": "SET NODE_ENV=production && node -r ts-node/register index.ts",
+    "dev": "SET NODE_ENV=development && node -r ts-node/register index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -21,15 +21,6 @@
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.1"
   },
-  "_moduleAliases": {
-    "@root": ".",
-    "@helper": "Helpers",
-    "@middleware": "lib/some-file.js",
-    "@data": "Data"
-  },
-  "_moduleDirectories": [
-    "node_modules_custom"
-  ],
   "devDependencies": {
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"

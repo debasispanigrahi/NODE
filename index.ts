@@ -1,7 +1,7 @@
 //DEPENDENCY
-require('module-alias/register')
+require("./moduleAlias")
+require("@helper/global")
 const express = require('express');
-// import express  from "express";
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
 const cors = require('cors');
@@ -59,7 +59,7 @@ mongo
     .then(() => {
         console.log("Database Connection Successful");
     })
-    .catch((err) => {
+    .catch(() => {
         console.log("Error occured While connecting database");
     });
 
