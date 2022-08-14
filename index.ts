@@ -1,15 +1,15 @@
 //DEPENDENCY
 require("./moduleAlias")
 require("@helper/global")
+const {socketList,eventList}=require("@helper/containers")
 const express = require('express');
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
 const cors = require('cors');
 const fileUpload = require("express-fileupload");
-const socketIO = require("socket.io");
+const socketIO = process.env.SOCKET ? require("socket.io"): null;
 const http = require("http");
 const es6Renderer = require('express-es6-template-engine');
-
 
 //IMPORT_FILE
 const web = require("./Routes/web");
@@ -21,7 +21,7 @@ const test = require("./Routes/test");
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server, {
+const io = socketIO ? socketIO(server, {
     cors: {
         origins: "*:*"
     },
@@ -35,7 +35,8 @@ const io = socketIO(server, {
         'jsonp-polling',
         'polling'
     ]
-});
+}): null
+socketList.push({"global":io})
 
 //SERVER_USE
 app.engine('html', es6Renderer)
