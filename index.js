@@ -1,7 +1,7 @@
 //DEPENDENCY
-require("./moduleAlias")
-require("@helper/global")
-const {socketList,eventList}=require("@helper/containers")
+require("module-alias")
+require("@root/Helpers/global")
+const {socketList,eventList}=require("@root/Helpers/containers")
 const express = require('express');
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
@@ -16,6 +16,7 @@ const web = require("./Routes/web");
 const api = require("./Routes/api");
 const cmdConsole = require("./Routes/console");
 const test = require("./Routes/test");
+
 
 //CONFIGURE
 dotenv.config();

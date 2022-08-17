@@ -1,4 +1,4 @@
-const socket_list:[]=[]
-const event_list:[]=[]
+const socketList:[]=[]
+const eventList:[]=[]
 
-module.exports = {socketList:socket_list, eventList:event_list}
+module.exports = {socketList, eventList}

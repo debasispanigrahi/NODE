@@ -21,18 +21,7 @@
       "@root/*": [
         "./*"
       ],
-      "@helper/*": [
-        "./Helpers/*"
-      ],
-      "@controller/*": [
-        "./Controllers/*"
-      ],
-      "@cron/*": [
-        "./Crons/*"
-      ],
-      "@data/*": [
-        "./Data/*"
-      ]
+      "@root":["./"]
     },
     "baseUrl": "./",
     "alwaysStrict": true,
