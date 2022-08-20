@@ -18,10 +18,12 @@
       "DOM"
     ],
     "paths": {
-      "@root/*": [
+      "~/*": [
         "./*"
       ],
-      "@root":["./"]
+      "@/*": [
+        "./*"
+      ]
     },
     "baseUrl": "./",
     "alwaysStrict": true,

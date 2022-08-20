@@ -1,5 +1,5 @@
-const { delay } = require("@root/Helpers/utilty");
-const userModel = require("@root/Models/user.model");
+const { delay } = require("@/Helpers/utilty");
+const userModel = require("@/Models/user.model");
 exports.start = async (req, res) => {
     // let answer;
     // const find = await userModel.find({})

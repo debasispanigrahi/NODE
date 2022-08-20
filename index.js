@@ -1,7 +1,7 @@
 //DEPENDENCY
-require("module-alias")
-require("@root/Helpers/global")
-const {socketList,eventList}=require("@root/Helpers/containers")
+require('module-alias/register')
+require("@/Helpers/global")
+const {socketList,eventList}=require("@/Helpers/containers")
 const express = require('express');
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
