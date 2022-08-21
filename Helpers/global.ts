@@ -1,5 +1,10 @@
 //DEPENDENCY
 const crypt = require('crypto');
+const z002=require('pino')({
+    transport:{
+        target:'pino-pretty'
+    }
+})
 
 //FUNCTION DECLARATION
 const z000 = (): string => crypt.randomUUID()
@@ -33,3 +38,6 @@ var custom: Custom
 global.custom = {
     generateUuid: z000
 }
+
+var Logger:{}
+global.Logger=z002

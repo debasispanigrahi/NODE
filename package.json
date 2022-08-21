@@ -19,6 +19,8 @@
     "module-alias": "^2.2.2",
     "mongoose": "^6.3.0",
     "nodemon": "^2.0.15",
+    "pino": "^8.4.1",
+    "pino-pretty": "^9.0.1",
     "socket.io": "^4.4.1"
   },
   "_moduleAliases": {
