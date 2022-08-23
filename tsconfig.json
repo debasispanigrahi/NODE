@@ -32,7 +32,7 @@
   "include": [
     "*"
   ],
-  "files": ["./Helpers/global.ts"],
+  "files": ["Helpers/global.helper.ts"],
   "exclude": [
     "node_modules",
     "**/node_modules/*"

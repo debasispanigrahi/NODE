@@ -1,7 +1,7 @@
 //DEPENDENCY
 require('module-alias/register')
-require("@/Helpers/global")
-const {socketList,eventList}=require("@/Helpers/containers")
+require("@/Helpers/global.helper")
+const {socketList,eventList}=require("@/Helpers/containers.helper")
 const express = require('express');
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
@@ -12,10 +12,10 @@ const http = require("http");
 const es6Renderer = require('express-es6-template-engine');
 
 //IMPORT_FILE
-const web = require("./Routes/web");
-const api = require("./Routes/api");
-const cmdConsole = require("./Routes/console");
-const test = require("./Routes/test");
+const web = require("./Routes/web.route");
+const api = require("./Routes/api.route");
+const cmdConsole = require("./Routes/console.route");
+const test = require("./Routes/test.route");
 
 
 //CONFIGURE
@@ -69,7 +69,8 @@ mongo
 app.use("/api", api);
 app.use("/console", cmdConsole);
 app.use("/test", test)
-app.use(["/", "/index.php"], web);
+// app.use(["/", "/index.php"], web);
+app.use("/web",web)
 
 //SERVER
 server.listen(port, host, () => {
