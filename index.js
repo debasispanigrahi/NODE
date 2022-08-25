@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const mongo = require("mongoose");
 const cors = require('cors');
 const fileUpload = require("express-fileupload");
-const socketIO = process.env.SOCKET ? require("socket.io"): null;
+const socketIo = process.env.SOCKET ? require("socket.io"): null;
 const http = require("http");
 const es6Renderer = require('express-es6-template-engine');
 
@@ -22,7 +22,7 @@ const test = require("./Routes/test.route");
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = socketIO ? socketIO(server, {
+const io = socketIo ? socketIo(server, {
     cors: {
         origins: "*:*"
     },

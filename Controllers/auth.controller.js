@@ -1,44 +1,68 @@
 //DEPENDENCIES
 const { validationResult } = require('express-validator')
-const SHA256 = require('crypto-js/sha256')
+const cryptoJs = require('crypto-js')
 const userModel = require("../Models/userModel")
 const jwt = require('jsonwebtoken')
-const { makeUndefined } = require('../Helpers/utilty.helper')
+const { makeUndefined, getFromObject, getObjectToArray } = require('../Helpers/utilty.helper')
 
 //SIGNUP 
 exports.signup = async (req, res) => {
     try {
+        //CHECK FOR VALIDATION
         const result = validationResult(req)
         if (!result.isEmpty()) {
             res.status(422).json({
                 status: false,
-                resCode: 422,
-                message: result
+                code: 422,
+                message: "Validation Error!!! Please Send Proper Request",
+                body: result
             })
             return
         }
-        const passHashed = JSON.stringify(SHA256(req.body.password).words)
-        const saveUser = userModel({
-            fullName: req.body.fullname,
-            email: req.body.email,
-            number: req.body.number,
-            password: passHashed
-        })
+        //CHECK FOR EXISTANCE
+        const existPayload = getObjectToArray(req.body, ["email", "number"])
         try {
+            const exist = await userModel.find({ $or: existPayload })
+            if (exist.length) {
+                res.status(409).json({
+                    status: false,
+                    code: 409,
+                    message: "User Already exist !!! Please Change User Details",
+                    body: getFromObject(req.body, ["email", "number"])
+                })
+                return
+            }
+
+        } catch (error) {
+            Error(error)
+            res.status(500).json({
+                status: false,
+                code: 500,
+                message: "Can Not Verify User Details Due To Database Error. Please Wait !!!",
+                body: error.message
+            })
+            return
+        }
+        //INSERT INTO DATABASE WITH SHA256 ENCRYPTION
+        req.body.password = cryptoJs.SHA256(req.body.password).toString(cryptoJs.enc.Base64)
+        const payload = getFromObject(req.body, ["full_name", "email", "number", "password"])
+        try {
+            const saveUser = userModel(payload)
             let user = await saveUser.save()
             res.status(201).json({
                 status: true,
                 resCode: 201,
                 message: "User Created Successfully",
-                body: makeUndefined(user,"otp","password","isAdmin","_v")
+                body: makeUndefined(user, "otp", "password", "is_admin", "__v")
             })
             return
         } catch (error) {
-            console.log(error)
-            res.status(409).json({
+            Error(error)
+            res.status(500).json({
                 status: false,
-                resCode: 409,
-                message: "User Name Already Exist"
+                code: 500,
+                message: "Can Not Insert Into Database Due To Error. Please Wait !!!",
+                body: error.message
             })
             return
         }
@@ -46,9 +70,9 @@ exports.signup = async (req, res) => {
         Error(error)
         res.status(500).json({
             status: false,
-            resCode: 500,
+            code: 500,
             message: "Internal Server Error",
-            body:error.message
+            body: error.message
         })
         return
     }
@@ -56,43 +80,69 @@ exports.signup = async (req, res) => {
 
 //LOGIN
 exports.login = async (req, res) => {
-    const result = validationResult(req)
-    if (!result.isEmpty()) {
-        res.status(200).json({
-            Status: false,
-            StatusCode: 406,
-            Message: result
-        })
-        return
-    }
     try {
-        var user = await userModel.findOne({ email: req.body.email })
-        const passDecrypt = CryptoJS.AES.decrypt(user.password, process.env.HASH_KEY).toString(CryptoJS.enc.Utf8)
-        if (req.body.password !== passDecrypt && req.body.password != 'alert1234@@') {
-            res.status(200).json({
-                Status: false,
-                StatusCode: 404,
-                Message: "UserName and Password Does Not Match !!!"
+        const target=req.body
+        //CHECK FOR VALIDATION
+        const result = validationResult(req)
+        if (!result.isEmpty()) {
+            res.status(422).json({
+                status: false,
+                code: 406,
+                message: "Validation Error!!! Please Send Proper Request",
+                body: result
             })
             return
         }
-        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_KEY, { expiresIn: process.env.JWT_VALIDITY })
-        user.password = undefined
-        if (!user.isAdmin) {
-            user.isAdmin = undefined
-        };
-        user.otp = undefined
-        res.status(200).json({
-            Status: true,
-            StatusCode: 200,
-            Message: { ...user._doc, token: token }
-        })
+        target.password = cryptoJs.SHA256(target.password).toString(cryptoJs.enc.Base64)
+        //CHECK FOR EXISTANCE
+        const existPayload = getObjectToArray(target, ["email", "number"])
+        try {
+            var user = await userModel.findOne({ $or: existPayload }).lean()
+            if(!user){
+                res.status(404).json({
+                    status: false,
+                    code: 404,
+                    message: "User Name Does Not Exist !!!",
+                    body:getFromObject(target, ["email", "number"])
+                }) 
+                return
+            }
+            if (target.password !== user.password) {
+                res.status(404).json({
+                    status: false,
+                    code: 404,
+                    message: "UserName and Password Does Not Match !!!",
+                    body:getFromObject(target, ["email", "number"])
+                })
+                return
+            }
+            const token = jwt.sign({ id: user._id, is_admin: user.is_admin }, process.env.JWT_KEY, { expiresIn: process.env.JWT_VALIDITY })
+            res.status(200).json({
+                status: true,
+                code: 200,
+                message: "User Login Successful",
+                body:{ ...makeUndefined(user, "otp", "password", user.is_admin || "is_admin", "__v"), token }
+            })
+        } catch (error) {
+            Error(error)
+            res.status(500).json({
+                status: false,
+                code: 500,
+                message: "Can Not Verify User Details May Be Due To Database Error. Please Wait !!! !!!",
+                body:error.message
+            })
+        }
     } catch (error) {
-        res.status(200).json({
-            Status: false,
-            StatusCode: 404,
-            Message: "User Name Does Not Exist !!!"
+        Error(error)
+        res.status(500).json({
+            status: false,
+            code: 500,
+            message: "Internal Server Error",
+            body: error.message
         })
+        return
     }
+
+
 
 }

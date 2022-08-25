@@ -3,20 +3,20 @@ const { Schema, model } = require('mongoose')
 
 //SCHEMA
 const schema = Schema({
-    fullName: { required: true, type: String },
+    full_name: { required: true, type: String },
     email: { required: true, type: String, unique: true },
-    number: { required: true, type: Number, unique: true },
+    number: { required: true, type: String, unique: true },
     password: { required: true, type: String },
-    isAdmin: { type: Boolean, default: false },
+    is_admin: { type: Boolean, default: false },
     plan: { type: String, default: "basic" },
     status: { type: String, default: "pending" },
     otp: { type: String, default: 12345678 },
-    activeTill: { type: Date, default: new Date().setDate(new Date().getDate() + 10) },
-    appKey: { type: String, default: null },
-    appSecret: { type: String, default: null }
+    active_till: { type: Date, default: new Date().setDate(new Date().getDate() + 10) },
+    app_key: { type: String, default: null },
+    app_secret: { type: String, default: null }
 }, { timestamps: true })
 
-let user=model("user_cred", schema)
+let user=model("usercred", schema)
 user.ensureIndexes()
 
 //EXPORT
