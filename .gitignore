@@ -2,3 +2,5 @@ package-lock.json
 node_modules
 .env
 trash*
+log.md
+user.json
