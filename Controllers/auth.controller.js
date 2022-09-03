@@ -1,7 +1,7 @@
 //DEPENDENCIES
 const { validationResult } = require('express-validator')
 const cryptoJs = require('crypto-js')
-const userModel = require("../Models/userModel")
+const userModel = require("../Models/user.model")
 const jwt = require('jsonwebtoken')
 const { makeUndefined, getFromObject, getObjectToArray } = require('../Helpers/utilty.helper')
 
@@ -51,7 +51,7 @@ exports.signup = async (req, res) => {
             let user = await saveUser.save()
             res.status(201).json({
                 status: true,
-                resCode: 201,
+                code: 201,
                 message: "User Created Successfully",
                 body: makeUndefined(user, "otp", "password", "is_admin", "__v")
             })
