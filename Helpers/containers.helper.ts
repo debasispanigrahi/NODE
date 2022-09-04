@@ -1,4 +1,3 @@
-const socketList:[]=[]
 const eventList:[]=[]
 
-module.exports = {socketList, eventList}
+module.exports = {eventList}

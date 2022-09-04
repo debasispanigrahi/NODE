@@ -1,13 +1,12 @@
 //DEPENDENCY
 require('module-alias/register')
 require("@/Helpers/global.helper")
-const {socketList,eventList}=require("@/Helpers/containers.helper")
+const {eventList}=require("@/Helpers/containers.helper")
 const express = require('express');
 const dotenv = require('dotenv');
 const mongo = require("mongoose");
 const cors = require('cors');
 const fileUpload = require("express-fileupload");
-const socketIo = process.env.SOCKET ? require("socket.io"): null;
 const http = require("http");
 const es6Renderer = require('express-es6-template-engine');
 
@@ -22,22 +21,6 @@ const test = require("./Routes/test.route");
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = socketIo ? socketIo(server, {
-    cors: {
-        origins: "*:*"
-    },
-    rejectUnauthorized: false,
-    disableHostCheck: true,
-    secure: true,
-    transports: ['websocket',
-        'flashsocket',
-        'htmlfile',
-        'xhr-polling',
-        'jsonp-polling',
-        'polling'
-    ]
-}): null
-socketList.push({"global":io})
 
 //SERVER_USE
 app.engine('html', es6Renderer)
