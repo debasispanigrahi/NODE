@@ -4,3 +4,4 @@ node_modules
 trash*
 log.md
 user.json
+Faker/fetch.json
