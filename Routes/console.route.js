@@ -3,4 +3,4 @@ router.get("/", (req, res) => {
     res.send("console")
 })
 
-module.exports = router
+export default router

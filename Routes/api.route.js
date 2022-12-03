@@ -3,4 +3,4 @@ router.get("/", (req, res) => {
     res.send("Dynamic Api")
 })
 
-module.exports = router
+export default router

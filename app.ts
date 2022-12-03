@@ -1,25 +1,26 @@
 //DEPENDENCY
-require('module-alias/register')
-require("@/Helpers/global.helper")
-const {eventList}=require("@/Helpers/containers.helper")
-const express = require('express');
-const dotenv = require('dotenv');
-const mongo = require("mongoose");
-const cors = require('cors');
-const fileUpload = require("express-fileupload");
-const http = require("http");
-const es6Renderer = require('express-es6-template-engine');
+/// <reference path="./@types/module.d.ts" />
+
+import'module-alias/register.js'
+import '@/Helpers/global.helper.js'
+import express, {Express} from 'express'
+import dotenv from 'dotenv'
+import mongo from 'mongoose'
+import cors from 'cors'
+import fileUpload from 'express-fileupload'
+import http from 'http'
+import es6Renderer from 'express-es6-template-engine'
 
 //IMPORT_FILE
-const web = require("./Routes/web.route");
-const api = require("./Routes/api.route");
-const cmdConsole = require("./Routes/console.route");
-const test = require("./Routes/test.route");
+import web from '@/Routes/web.route'
+import api from '@/Routes/api.route'
+import cmdConsole from '@/Routes/console.route'
+import test from '@/Routes/test.route'
 
 
 //CONFIGURE
 dotenv.config();
-const app = express();
+const app:Express = express();
 const server = http.createServer(app);
 
 //SERVER_USE
@@ -36,7 +37,8 @@ app.use(fileUpload())
 //VARIABLE
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || '8080';
-const mongoUrl = process.env.MONGO_LOCAL_URL || process.env.MONGO_URL;
+const mongoUrl = process.env.MONGO_LOCAL_URL || process.env.MONGO_URL||'';
+const backlog=process.env.BACK_LOG || 511
 
 //DATABASE CONNECTION CHECK
 mongo
@@ -52,11 +54,11 @@ mongo
 app.use("/api", api);
 app.use("/console", cmdConsole);
 app.use("/test", test)
-// app.use(["/", "/index.php"], web);
-app.use("/web",web)
+app.use(["/", "/index.php"], web);
+// app.use("/web",web)
 
 //SERVER
-server.listen(port, host, () => {
+server.listen(+port, host, +backlog,() => {
     console.log(`Server Running On http://${host}:${port}`)
 })
 

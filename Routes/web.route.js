@@ -17,4 +17,4 @@ router.post("/user/update/:id",verifyAdminToken,updateUserAdminValidator,control
 router.post("/user/delete/:id",verifyAdminToken,deleteUserAdminValidator,controllers.user.deleteAdmin)
 
 //EXPORT
-module.exports = router
+export default router

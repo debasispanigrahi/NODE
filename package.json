@@ -7,31 +7,35 @@
   },
   "scripts": {
     "start:dev": "npx nodemon --exec \"npm run dev\"",
-    "prod": "SET NODE_ENV=production && node -r ts-node/register index.js",
-    "dev": "SET NODE_ENV=development && node -r ts-node/register index.js"
+    "prod": "SET NODE_ENV=production && node -r ts-node/register index.ts",
+    "dev": "SET NODE_ENV=development && node -r ts-node/register index.ts"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.1.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
     "express-es6-template-engine": "^2.2.3",
-    "express-fileupload": "^1.3.1",
+    "express-fileupload": "^1.4.0",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
-    "mongoose": "^6.3.0",
-    "nodemon": "^2.0.15",
-    "pino": "^8.4.1",
-    "pino-pretty": "^9.0.1"
+    "mongoose": "^6.7.5",
+    "nodemon": "^2.0.20",
+    "pino": "^8.7.0",
+    "pino-pretty": "^9.1.1"
   },
   "_moduleAliases": {
     "@": "."
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.5.0",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "@faker-js/faker": "^7.6.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/express-fileupload": "^1.4.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
   }
 }

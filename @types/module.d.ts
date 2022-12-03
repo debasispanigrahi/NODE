@@ -1,0 +1,1 @@
+declare module "express-es6-template-engine"
