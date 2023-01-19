@@ -1,7 +1,9 @@
+
+// @ts-nocheck
+
 //DEPENDENCIES
 const jwt = require("jsonwebtoken")
 const { validationResult } = require("express-validator");
-// const userModel = require("../Model/userModel")
 
 //FUNCTION FOR VERIFY TOKEN
 const verifyUserToken = (req, res, next) => {

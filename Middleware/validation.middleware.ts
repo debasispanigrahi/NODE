@@ -1,8 +1,9 @@
 
 //DEPENDENCIES
-const { body,oneOf, query, param } = require("express-validator");
-const {onlyOne,isOtherField}=require("./coustom.middleware")
-const {planList,userStatusList,fieldListAdmin}=require("../Helpers/constants.helper")
+import { body, oneOf, query, param } from "express-validator";
+import { onlyOne } from "./coustom.middleware";
+import { planList, userStatusList, fieldListAdmin } from "../Helpers/constants.helper";
+// @ts-nocheck
 
 //VALIDATION FOR SIGNUP
 const signupValidator = [body("full_name").notEmpty().withMessage("Fullname is required").bail().isLength({ max: 40, min: 5 }).withMessage("Fullname must be below 40 characters and above 5 charcters"),
@@ -29,7 +30,7 @@ body("number").optional().isNumeric().withMessage("Please provide valid phone nu
 body("password").optional().isLength({ min: 8 }).withMessage("Password must be 8 character"),
 body("status").optional().custom(i=>userStatusList.includes(i)).withMessage("Valid Status Value Must Be Provided"),
 body("plan").optional().custom(i=>planList.includes(i)).withMessage("Valid Value Must Be Provided"),
-body("activeTill").optional().toDate().isDate().withMessage("Please Provide Valid Date").isAfter().withMessage("Date Must Be future One")],
+body("activeTill").optional().toDate().isDate().withMessage("Please Provide Valid Date").isAfter().withMessage("Date Must Be future One")]
 
 //VALIDATION FOR DELETE BY ADMIN
 const deleteUserAdminValidator=[param("id").isMongoId().withMessage("Pass Valid Mongo id"),query("force").optional().isBoolean().withMessage("Value Must Be Boolean")]
