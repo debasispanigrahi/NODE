@@ -2,7 +2,7 @@
 const userModel = require("@/Models/user.model");
 const cryptoJs = require("crypto-js");
 const { makeUndefined, getFromObject } = require("../Helpers/utilty.helper");
-const { validationResult } = require('express-validator')
+const { validationResult } = require("express-validator")
 
 //GET REQUEST FOR SPECIFIC USER
 exports.find = async (req, res) => {
@@ -242,7 +242,7 @@ exports.delete = async (req, res) => {
                 })
                 return
             }
-            else if (user.status === 'hidden') {
+            else if (user.status === "hidden") {
                 res.status(406).json({
                     status: false,
                     code: 406,
@@ -265,7 +265,7 @@ exports.delete = async (req, res) => {
             const user = await userModel.findOneAndUpdate(
                 { id },
                 {
-                    status: 'hidden',
+                    status: "hidden",
                     updatedAt: new Date()
                 },
                 { runValidators: true, new: true }
@@ -360,7 +360,7 @@ exports.deleteAdmin = async (req, res) => {
             }
         }
         else {
-            if (user.status === 'hidden') {
+            if (user.status === "hidden") {
                 res.status(406).json({
                     status: false,
                     code: 406,
@@ -373,7 +373,7 @@ exports.deleteAdmin = async (req, res) => {
                 const softDeleteUser = await userModel.findOneAndUpdate(
                     { id },
                     {
-                        status: 'hidden',
+                        status: "hidden",
                         updatedAt: new Date()
                     },
                     { runValidators: true, new: true }

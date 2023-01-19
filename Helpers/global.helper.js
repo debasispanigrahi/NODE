@@ -1,8 +1,8 @@
 // //DEPENDENCY
-// const crypt = require('crypto');
-// const z002=require('pino')({
+// const crypt = require("crypto");
+// const z002=require("pino")({
 //     transport:{
-//         target:'pino-pretty'
+//         target:"pino-pretty"
 //     }
 // })
 

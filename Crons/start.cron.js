@@ -1,6 +1,6 @@
-require('module-alias/register');
-const { getSessionFile } = require('@/Helpers/utilty');
-const fs = require('fs');
+require("module-alias/register");
+const { getSessionFile } = require("@/Helpers/utilty");
+const fs = require("fs");
 const CRON_FILE = "Data/cron.json";
 let cron_content
 cron_content = getSessionFile(CRON_FILE);

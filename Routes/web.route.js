@@ -1,7 +1,7 @@
 //DEPENDENCIES
-const router = require('express').Router();
-const controllers = require('@/Controllers');
-const { signupValidator,loginValidator,updateUserValidator ,updateUserAdminValidator,deleteUserAdminValidator,findUserAdminValidatore} = require('@/Middleware/validation.middleware');
+const router = require("express").Router();
+const controllers = require("@/Controllers");
+const { signupValidator,loginValidator,updateUserValidator ,updateUserAdminValidator,deleteUserAdminValidator,findUserAdminValidatore} = require("@/Middleware/validation.middleware");
 const {verifyAdminToken,verifyUserToken}=require("@/Middleware/token.middleware")
 
 //AUTH ROUTE

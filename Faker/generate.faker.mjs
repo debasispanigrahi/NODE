@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 import fs from "fs"
 const data=[]
 
@@ -6,7 +6,7 @@ function generate(n){
   const user={
     full_name:faker.name.fullName(),
     email:faker.internet.email(),
-    number:faker.phone.number('##########'),
+    number:faker.phone.number("##########"),
     password:faker.datatype.string(10)
   }
   data.push(user)

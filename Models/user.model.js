@@ -1,5 +1,5 @@
 //DEPENDENCIES
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose")
 const {userStatusList, planList}=require("../Helpers/constants.helper")
 
 //SCHEMA

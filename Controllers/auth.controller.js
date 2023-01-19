@@ -1,9 +1,9 @@
 //DEPENDENCIES
-const { validationResult } = require('express-validator')
-const cryptoJs = require('crypto-js')
+const { validationResult } = require("express-validator")
+const cryptoJs = require("crypto-js")
 const userModel = require("../Models/user.model")
-const jwt = require('jsonwebtoken')
-const { makeUndefined, getFromObject, getObjectToArray } = require('../Helpers/utilty.helper')
+const jwt = require("jsonwebtoken")
+const { makeUndefined, getFromObject, getObjectToArray } = require("../Helpers/utilty.helper")
 
 //SIGNUP 
 exports.signup = async (req, res) => {
@@ -142,7 +142,4 @@ exports.login = async (req, res) => {
         })
         return
     }
-
-
-
 }

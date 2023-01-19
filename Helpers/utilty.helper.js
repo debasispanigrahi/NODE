@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require("fs")
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
